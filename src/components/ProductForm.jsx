@@ -1,6 +1,25 @@
+import { useState } from "react";
+
 function ProductForm() {
+  const [formData, setFormData] = useState({
+    name: "",
+    image: "",
+    price: 0,
+    description: "",
+  });
+
+  function handleFormChange({ name, value }) {
+    console.log(name, value);
+    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    alert(JSON.stringify(formData));
+  }
+
   return (
-    <form className="post-form">
+    <form className="post-form" onSubmit={(e) => handleSubmit(e)}>
       <h1>Create Product Form</h1>
       <div className="input-container">
         <label>
@@ -10,7 +29,7 @@ function ProductForm() {
             name="name"
             type="text"
             placeholder="Enter name here"
-            onChange={() => {}}
+            onChange={(e) => handleFormChange(e.target)}
           />
         </label>
       </div>
@@ -22,7 +41,7 @@ function ProductForm() {
             name="image"
             type="text"
             placeholder="Enter image url here"
-            onChange={() => {}}
+            onChange={(e) => handleFormChange(e.target)}
           />
         </label>
       </div>
@@ -34,7 +53,7 @@ function ProductForm() {
             name="price"
             type="number"
             placeholder="Enter price here"
-            onChange={() => {}}
+            onChange={(e) => handleFormChange(e.target)}
           />
         </label>
       </div>
@@ -46,7 +65,7 @@ function ProductForm() {
             name="description"
             type="text"
             placeholder="Enter description here"
-            onChange={() => {}}
+            onChange={(e) => handleFormChange(e.target)}
             rows={4}
             cols={30}
           />
